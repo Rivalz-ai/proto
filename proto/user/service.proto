@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package user;
+import "user/models/sign_in.proto";
+
+option go_package = "pb/go/user;user";
+
+service UserService {
+  rpc SignInWithWallet(SignInRequest) returns (SignInResponse){};
+}

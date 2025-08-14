@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package price;
+option go_package = "pb/go/price;price";
+
+message PriceRequest {
+  string source = 1;
+  string token = 2;
+}
+
+message PriceResponseData {
+  double price = 1;
+}
+
+message SignInResponse {
+  int64 code = 1;
+  string msg = 2;
+  PriceResponseData data = 3;
+}

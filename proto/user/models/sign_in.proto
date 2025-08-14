@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package user;
+option go_package = "pb/go/user;user";
+
+message SignInRequest {
+  string message = 1;
+  string signature = 2;
+}
+
+message SignInResponseData {
+  string token = 1;
+}
+
+message SignInResponse {
+  int64 code = 1;
+  string msg = 2;
+  SignInResponseData data = 3;
+}
