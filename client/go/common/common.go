@@ -125,7 +125,7 @@ func GetEndpoint(service_name string) string {
 		return ""
 	}
 	if IsServiceName(service_name) {
-		//service_name=strings.ReplaceAll(service_name,"services.","")
+		service_name = strings.ReplaceAll(service_name, "micros.", "")
 		arr := utils.Explode(service_name, ".")
 		arr = utils.ReverseStringArray(arr)
 		return strings.Join(arr, ".") + ".svc." + env
