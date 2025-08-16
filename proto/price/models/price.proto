@@ -12,7 +12,7 @@ message PriceResponseData {
   double price = 1;
 }
 
-message SignInResponse {
+message PriceResponse {
   int64 code = 1;
   string msg = 2;
   PriceResponseData data = 3;

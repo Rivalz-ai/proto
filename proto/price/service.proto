@@ -1,10 +1,10 @@
 syntax = "proto3";
 
 package price;
-import "price/models/coingecko.proto";
+import "price/models/price.proto";
 
 option go_package = "pb/go/price;price";
 
 service PriceService {
-  rpc SignInWithWallet(SignInRequest) returns (SignInResponse){};
+  rpc GetPrice(PriceRequest) returns (PriceResponse){};
 }
