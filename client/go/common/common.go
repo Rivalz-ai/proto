@@ -116,19 +116,21 @@ func IsServiceName(endpoint string) bool {
 	return true
 }
 
-// servicename: base.user
+// servicename: micros.base.user
 // ENV CLUSTER: prd, stg
-// full service name in k8s: user.base.svc.prd
+// full service name in k8s: user.stg-base
 func GetEndpoint(service_name string) string {
-	env := os.Getenv("CLUSTER")
+	env := os.Getenv("ENV")
 	if env == "" {
 		return ""
 	}
 	if IsServiceName(service_name) {
 		service_name = strings.ReplaceAll(service_name, "micros.", "")
 		arr := utils.Explode(service_name, ".")
-		arr = utils.ReverseStringArray(arr)
-		return strings.Join(arr, ".") + ".svc." + env
+		if len(arr) == 2 {
+			return arr[1] + env + "-" + arr[0]
+		}
+		return service_name
 	}
 	return service_name
 }
