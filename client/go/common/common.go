@@ -128,7 +128,7 @@ func GetEndpoint(service_name string) string {
 		service_name = strings.ReplaceAll(service_name, "micros.", "")
 		arr := utils.Explode(service_name, ".")
 		if len(arr) == 2 {
-			return arr[1] + env + "-" + arr[0]
+			return arr[1] + "." + env + "-" + arr[0]
 		}
 		return service_name
 	}
