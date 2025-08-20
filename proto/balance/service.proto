@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "balance/models/balance.proto";
+
+package balance;
+
+service BalanceService {
+  rpc getTokenBalance (BalanceByAddressRequest) returns (BalanceResponse) {}
+}   

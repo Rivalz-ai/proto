@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package balance;
+
+message BalanceByAddressRequest {
+  int64 chainId = 1;
+  string walletAddress = 2;
+  string tokenAddress = 3;
+}
+
+message BalanceResponse {
+  int64 chainId = 1;
+  string walletAddress = 2;
+  string tokenAddress = 3;
+  string balance = 4;
+  int64 decimals = 5;
+  string symbol = 6;
+  string formattedBalance = 7;
+  string price = 8;
+}
