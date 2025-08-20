@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package protocol;
+import "protocol/models/protocol.proto";
+
+option go_package = "pb/go/protocol;protocol";
+
+service ProtocolService {
+  rpc GetInfo(GetInfoRequest) returns (GetInfoResponse){};
+}

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package protocol;
+option go_package = "pb/go/protocol;protocol";
+
+message GetInfoRequest {
+  string name = 1;
+}
+
+message GetInfoResponseData {
+  string name  = 1;
+  string chain = 2;
+  string token = 3;
+  double price = 4;
+  double tvl   = 5;
+}
+
+message GetInfoResponse {
+  int64 code = 1;
+  string msg = 2;
+  GetInfoResponseData data = 3;
+}

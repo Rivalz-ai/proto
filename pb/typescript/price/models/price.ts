@@ -18,7 +18,7 @@ export interface PriceResponseData {
   price: number;
 }
 
-export interface SignInResponse {
+export interface PriceResponse {
   code: number;
   msg: string;
   data: PriceResponseData | undefined;
@@ -158,12 +158,12 @@ export const PriceResponseData: MessageFns<PriceResponseData> = {
   },
 };
 
-function createBaseSignInResponse(): SignInResponse {
+function createBasePriceResponse(): PriceResponse {
   return { code: 0, msg: "", data: undefined };
 }
 
-export const SignInResponse: MessageFns<SignInResponse> = {
-  encode(message: SignInResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const PriceResponse: MessageFns<PriceResponse> = {
+  encode(message: PriceResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.code !== 0) {
       writer.uint32(8).int64(message.code);
     }
@@ -176,10 +176,10 @@ export const SignInResponse: MessageFns<SignInResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SignInResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): PriceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSignInResponse();
+    const message = createBasePriceResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -216,7 +216,7 @@ export const SignInResponse: MessageFns<SignInResponse> = {
     return message;
   },
 
-  fromJSON(object: any): SignInResponse {
+  fromJSON(object: any): PriceResponse {
     return {
       code: isSet(object.code) ? globalThis.Number(object.code) : 0,
       msg: isSet(object.msg) ? globalThis.String(object.msg) : "",
@@ -224,7 +224,7 @@ export const SignInResponse: MessageFns<SignInResponse> = {
     };
   },
 
-  toJSON(message: SignInResponse): unknown {
+  toJSON(message: PriceResponse): unknown {
     const obj: any = {};
     if (message.code !== 0) {
       obj.code = Math.round(message.code);
@@ -238,11 +238,11 @@ export const SignInResponse: MessageFns<SignInResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SignInResponse>, I>>(base?: I): SignInResponse {
-    return SignInResponse.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<PriceResponse>, I>>(base?: I): PriceResponse {
+    return PriceResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SignInResponse>, I>>(object: I): SignInResponse {
-    const message = createBaseSignInResponse();
+  fromPartial<I extends Exact<DeepPartial<PriceResponse>, I>>(object: I): PriceResponse {
+    const message = createBasePriceResponse();
     message.code = object.code ?? 0;
     message.msg = object.msg ?? "";
     message.data = (object.data !== undefined && object.data !== null)

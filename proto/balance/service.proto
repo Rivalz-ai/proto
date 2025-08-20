@@ -3,7 +3,7 @@ syntax = "proto3";
 import "balance/models/balance.proto";
 
 package balance;
-
+option go_package = "pb/go/balance;balance";
 service BalanceService {
   rpc getTokenBalance (BalanceByAddressRequest) returns (BalanceResponse) {}
 }   

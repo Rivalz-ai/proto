@@ -17,47 +17,50 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { SignInRequest, SignInResponse } from "../user/models/sign_in";
+import { PriceRequest, PriceResponse } from "./models/price";
 
-export const protobufPackage = "user";
+export const protobufPackage = "price";
 
-export type UserServiceService = typeof UserServiceService;
-export const UserServiceService = {
-  signInWithWallet: {
-    path: "/user.UserService/SignInWithWallet",
+export type PriceServiceService = typeof PriceServiceService;
+export const PriceServiceService = {
+  getPrice: {
+    path: "/price.PriceService/GetPrice",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: SignInRequest): Buffer => Buffer.from(SignInRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SignInRequest => SignInRequest.decode(value),
-    responseSerialize: (value: SignInResponse): Buffer => Buffer.from(SignInResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): SignInResponse => SignInResponse.decode(value),
+    requestSerialize: (value: PriceRequest): Buffer => Buffer.from(PriceRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): PriceRequest => PriceRequest.decode(value),
+    responseSerialize: (value: PriceResponse): Buffer => Buffer.from(PriceResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): PriceResponse => PriceResponse.decode(value),
   },
 } as const;
 
-export interface UserServiceServer extends UntypedServiceImplementation {
-  signInWithWallet: handleUnaryCall<SignInRequest, SignInResponse>;
+export interface PriceServiceServer extends UntypedServiceImplementation {
+  getPrice: handleUnaryCall<PriceRequest, PriceResponse>;
 }
 
-export interface UserServiceClient extends Client {
-  signInWithWallet(
-    request: SignInRequest,
-    callback: (error: ServiceError | null, response: SignInResponse) => void,
+export interface PriceServiceClient extends Client {
+  getPrice(
+    request: PriceRequest,
+    callback: (error: ServiceError | null, response: PriceResponse) => void,
   ): ClientUnaryCall;
-  signInWithWallet(
-    request: SignInRequest,
+  getPrice(
+    request: PriceRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SignInResponse) => void,
+    callback: (error: ServiceError | null, response: PriceResponse) => void,
   ): ClientUnaryCall;
-  signInWithWallet(
-    request: SignInRequest,
+  getPrice(
+    request: PriceRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SignInResponse) => void,
+    callback: (error: ServiceError | null, response: PriceResponse) => void,
   ): ClientUnaryCall;
 }
 
-export const UserServiceClient = makeGenericClientConstructor(UserServiceService, "user.UserService") as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): UserServiceClient;
-  service: typeof UserServiceService;
+export const PriceServiceClient = makeGenericClientConstructor(
+  PriceServiceService,
+  "price.PriceService",
+) as unknown as {
+  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): PriceServiceClient;
+  service: typeof PriceServiceService;
   serviceName: string;
 };
