@@ -25,6 +25,7 @@
     "@nestjs/common": "^11.1.6",
     "@nestjs/core": "^11.1.6",
     "@nestjs/microservices": "^11.1.6",
-    "ts-proto": "^2.7.7"
+    "ts-proto": "^2.7.7",
+    "typescript": "^5.9.2"
   }
 }
