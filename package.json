@@ -1,23 +1,28 @@
 {
-  "name": "proto-generated",
-  "version": "1.0.0",
+  "name": "@donleeit/protos",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "don",
   "files": [
-    "dist",
-    "package.json",
-    "README.md"
+    "pb",
+    "proto"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "gen": "npx protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./pb/typescript --proto_path=./proto ./proto/**/*.proto --ts_proto_opt=esModuleInterop=true",
     "build": "tsc -p tsconfig.json",
-    "prepare": "npm run gen && npm run build"
+    "publish": "npm publish --access public"
   },
   "devDependencies": {
-    "glob": "^11.0.3",
-    "protoc": "^1.1.3",
-    "ts-proto": "^2.7.7"
+    "glob": "^11.0.3"
   },
   "dependencies": {
-    "@grpc/grpc-js": "^1.13.4"
+    "@donleeit/protos": "1.0.1",
+    "@grpc/grpc-js": "^1.13.4",
+    "ts-proto": "^2.7.7"
   }
 }
