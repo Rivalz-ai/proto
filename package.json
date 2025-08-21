@@ -1,6 +1,6 @@
 {
   "name": "@donleeit/protos",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -13,8 +13,8 @@
     "access": "public"
   },
   "scripts": {
-    "gen": "npx protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./pb/typescript --proto_path=./proto ./proto/**/*.proto --ts_proto_opt=esModuleInterop=true",
-    "build": "tsc -p tsconfig.json",
+    "gen": "npx protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./pb/typescript --proto_path=./proto ./proto/**/*.proto --ts_proto_opt=esModuleInterop=true --ts_proto_opt=nestJs=true",
+    "build": "yarn gen && tsc -p tsconfig.json",
     "publish": "npm publish --access public"
   },
   "devDependencies": {
@@ -23,6 +23,9 @@
   "dependencies": {
     "@donleeit/protos": "1.0.1",
     "@grpc/grpc-js": "^1.13.4",
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/core": "^11.1.6",
+    "@nestjs/microservices": "^11.1.6",
     "ts-proto": "^2.7.7"
   }
 }
