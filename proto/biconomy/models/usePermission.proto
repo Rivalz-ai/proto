@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package biconomy;
+
+option go_package = "pb/go/biconomy;biconomy";
+
+message UsePermissionRequest {
+  string orchestratorAddress = 1;
+  string strategyId = 2;
+  string to = 3; // contract address
+  string value = 4; // native token value
+  string txData = 5; // transaction data
+  int64 chainId = 6; // chain id
+  string feeToken = 7; // fee token
+}
+
+message UsePermissionResponse {
+  int64 chainId = 1;
+  string txHash = 2;
+}

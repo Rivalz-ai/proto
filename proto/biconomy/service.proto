@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package biconomy;
+import "biconomy/models/usePermission.proto";
+
+option go_package = "pb/go/biconomy;biconomy";
+
+service BiconomyService {
+  rpc UsePermission(UsePermissionRequest) returns (UsePermissionResponse){};
+}
