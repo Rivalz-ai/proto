@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package aave;
+
+option go_package = "pb/go/aave;aave";
+
+message SupplyERC20Request {
+  string userAddress = 1;
+  string orchestratorAddress = 2;
+  string strategyId = 3;
+  string poolAddress = 4;
+  string amount = 5;
+  string assetAddress = 6;
+}
+
+message SupplyERC20Response {
+  int64 chainId = 1;
+  string txHash = 2;
+  string amount = 3;
+}

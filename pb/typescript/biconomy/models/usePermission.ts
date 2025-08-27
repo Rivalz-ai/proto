@@ -11,16 +11,21 @@ export const protobufPackage = "biconomy";
 export interface UsePermissionRequest {
   orchestratorAddress: string;
   strategyId: string;
-  /** contract address */
-  to: string;
-  /** native token value */
-  value: string;
-  /** transaction data */
-  txData: string;
-  /** chain id */
-  chainId: number;
-  /** fee token */
+  txData: Instruction[];
   feeToken: string;
+  feeChainId: number;
+}
+
+export interface Call {
+  to: string;
+  value: string;
+  data: string;
+  functionSelector: string;
+}
+
+export interface Instruction {
+  chainId: number;
+  calls: Call[];
 }
 
 export interface UsePermissionResponse {

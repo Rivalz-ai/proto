@@ -6,5 +6,5 @@ import "biconomy/models/usePermission.proto";
 option go_package = "pb/go/biconomy;biconomy";
 
 service BiconomyService {
-  rpc UsePermission(UsePermissionRequest) returns (UsePermissionResponse){};
+  rpc UsePermission(UsePermissionRequest) returns (UsePermissionResponse) {};
 }

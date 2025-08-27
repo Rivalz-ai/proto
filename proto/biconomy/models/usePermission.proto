@@ -7,11 +7,21 @@ option go_package = "pb/go/biconomy;biconomy";
 message UsePermissionRequest {
   string orchestratorAddress = 1;
   string strategyId = 2;
-  string to = 3; // contract address
-  string value = 4; // native token value
-  string txData = 5; // transaction data
-  int64 chainId = 6; // chain id
-  string feeToken = 7; // fee token
+  repeated Instruction txData = 3;
+  string feeToken = 4;
+  int64 feeChainId = 5;
+}
+
+message Call {
+  string to = 1;
+  string value = 2;
+  string data = 3;
+  string functionSelector = 4;
+}
+
+message Instruction {
+  int64 chainId = 1;
+  repeated Call calls = 2;
 }
 
 message UsePermissionResponse {

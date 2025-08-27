@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package aave;
+import "aave/models/supplyERC20.proto";
+
+option go_package = "pb/go/aave;aave";
+
+service AaveService {
+  rpc SupplyERC20(SupplyERC20Request) returns (SupplyERC20Response) {};
+}
