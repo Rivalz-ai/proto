@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package hypurrfi;
+
+option go_package = "pb/go/hypurrfi;hypurrfi";
+
+message WithdrawERC20Request {
+  string userAddress = 1;
+  string orchestratorAddress = 2;
+  string strategyId = 3;
+  string poolAddress = 4;
+  string assetAddress = 5;
+}
+
+message WithdrawERC20Response {
+  int64 chainId = 1;
+  string txHash = 2;
+}
