@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package hypurrfi;
+
+option go_package = "pb/go/hypurrfi;hypurrfi";
+
+message GetAPRRequest {
+  string tokenAddress = 1;
+  string poolAddress = 2;
+}
+
+message GetAPRResponse {
+  string supplyAPR = 1;
+  string borrowAPR = 2;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package hypurrfi;
+
+option go_package = "pb/go/hypurrfi;hypurrfi";
+
+message GetLendingPoolRequest {}
+
+message ReserveListResponse {
+  string poolAddress = 1;
+  repeated string reserveAddress = 2;
+}
+
+message GetLendingPoolResponse { repeated ReserveListResponse reserves = 1; }

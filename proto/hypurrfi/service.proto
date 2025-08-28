@@ -3,10 +3,14 @@ syntax = "proto3";
 package hypurrfi;
 import "hypurrfi/models/supplyERC20.proto";
 import "hypurrfi/models/withdrawErc20.proto";
+import "hypurrfi/models/getAPR.proto";
+import "hypurrfi/models/getLendingPool.proto";
 
 option go_package = "pb/go/hypurrfi;hypurrfi";
 
 service HypurrfiService {
   rpc SupplyERC20(SupplyERC20Request) returns (SupplyERC20Response) {};
   rpc WithdrawERC20(WithdrawERC20Request) returns (WithdrawERC20Response) {};
+  rpc GetAPR(GetAPRRequest) returns (GetAPRResponse) {};
+  rpc GetLendingPool(GetLendingPoolRequest) returns (GetLendingPoolResponse) {};
 }

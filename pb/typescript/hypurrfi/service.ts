@@ -7,6 +7,8 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
+import { GetAPRRequest, GetAPRResponse } from "./models/getAPR";
+import { GetLendingPoolRequest, GetLendingPoolResponse } from "./models/getLendingPool";
 import { SupplyERC20Request, SupplyERC20Response } from "./models/supplyERC20";
 import { WithdrawERC20Request, WithdrawERC20Response } from "./models/withdrawErc20";
 
@@ -18,6 +20,10 @@ export interface HypurrfiServiceClient {
   supplyErc20(request: SupplyERC20Request): Observable<SupplyERC20Response>;
 
   withdrawErc20(request: WithdrawERC20Request): Observable<WithdrawERC20Response>;
+
+  getApr(request: GetAPRRequest): Observable<GetAPRResponse>;
+
+  getLendingPool(request: GetLendingPoolRequest): Observable<GetLendingPoolResponse>;
 }
 
 export interface HypurrfiServiceController {
@@ -28,11 +34,17 @@ export interface HypurrfiServiceController {
   withdrawErc20(
     request: WithdrawERC20Request,
   ): Promise<WithdrawERC20Response> | Observable<WithdrawERC20Response> | WithdrawERC20Response;
+
+  getApr(request: GetAPRRequest): Promise<GetAPRResponse> | Observable<GetAPRResponse> | GetAPRResponse;
+
+  getLendingPool(
+    request: GetLendingPoolRequest,
+  ): Promise<GetLendingPoolResponse> | Observable<GetLendingPoolResponse> | GetLendingPoolResponse;
 }
 
 export function HypurrfiServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["supplyErc20", "withdrawErc20"];
+    const grpcMethods: string[] = ["supplyErc20", "withdrawErc20", "getApr", "getLendingPool"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("HypurrfiService", method)(constructor.prototype[method], method, descriptor);

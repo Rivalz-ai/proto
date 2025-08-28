@@ -10,9 +10,11 @@ message WithdrawERC20Request {
   string strategyId = 3;
   string poolAddress = 4;
   string assetAddress = 5;
+  string amount = 6;
 }
 
 message WithdrawERC20Response {
   int64 chainId = 1;
   string txHash = 2;
+  string amount = 3;
 }
