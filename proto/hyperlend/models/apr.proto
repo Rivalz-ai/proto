@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package hyperlend;
+
+option go_package = "pb/go/hyperlend;hyperlend";
+
+message APRRequest {
+  string assetAddress = 1;
+}
+
+message APRResponse {
+  string supplyAPR = 1;
+  string borrowAPR = 2;
+}

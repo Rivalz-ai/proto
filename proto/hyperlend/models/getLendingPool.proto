@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package hyperlend;
+
+option go_package = "pb/go/hyperlend;hyperlend";
+
+message GetLendingPoolRequest {}
+
+message ReserveListResponse {
+  string poolAddress = 1;
+  repeated string reserveAddress = 2;
+}
+
+message GetLendingPoolResponse { repeated ReserveListResponse reserves = 1; }

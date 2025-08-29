@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package hyperlend;
+import "hyperlend/models/supplyERC20.proto";
+import "hyperlend/models/withdrawErc20.proto";
+import "hyperlend/models/apr.proto";
+import "hyperlend/models/getLendingPool.proto";
+
+
+option go_package = "pb/go/hyperlend;hyperlend";
+
+service HyperLendService {
+  rpc SupplyERC20(SupplyERC20Request) returns (SupplyERC20Response) {};
+  rpc WithdrawERC20(WithdrawERC20Request) returns (WithdrawERC20Response) {};
+  rpc GetAPY(APRRequest) returns(APRResponse) {};
+  rpc GetLendingPool(GetLendingPoolRequest) returns (GetLendingPoolResponse) {};
+}
