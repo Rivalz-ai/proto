@@ -18,3 +18,14 @@ message SupplyERC20Response {
   string txHash = 2;
   string amount = 3;
 }
+
+message SuppliedBalanceRequest {
+  string userAddress = 1;
+  string tokenAddress = 2; // supplied token address
+}
+
+message SuppliedBalanceResponse {
+  string tokenAddress = 1;
+  string balance = 2;
+  string decimals = 3;
+}

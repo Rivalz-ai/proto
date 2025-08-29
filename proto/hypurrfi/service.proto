@@ -13,4 +13,6 @@ service HypurrfiService {
   rpc WithdrawERC20(WithdrawERC20Request) returns (WithdrawERC20Response) {};
   rpc GetAPR(GetAPRRequest) returns (GetAPRResponse) {};
   rpc GetLendingPool(GetLendingPoolRequest) returns (GetLendingPoolResponse) {};
+  rpc GetSuppliedBalance(SuppliedBalanceRequest)
+      returns (SuppliedBalanceResponse) {};
 }

@@ -9,7 +9,12 @@ import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
 import { GetAPRRequest, GetAPRResponse } from "./models/getAPR";
 import { GetLendingPoolRequest, GetLendingPoolResponse } from "./models/getLendingPool";
-import { SupplyERC20Request, SupplyERC20Response } from "./models/supplyERC20";
+import {
+  SuppliedBalanceRequest,
+  SuppliedBalanceResponse,
+  SupplyERC20Request,
+  SupplyERC20Response,
+} from "./models/supplyERC20";
 import { WithdrawERC20Request, WithdrawERC20Response } from "./models/withdrawERC20";
 
 export const protobufPackage = "hypurrfi";
@@ -24,6 +29,8 @@ export interface HypurrfiServiceClient {
   getApr(request: GetAPRRequest): Observable<GetAPRResponse>;
 
   getLendingPool(request: GetLendingPoolRequest): Observable<GetLendingPoolResponse>;
+
+  getSuppliedBalance(request: SuppliedBalanceRequest): Observable<SuppliedBalanceResponse>;
 }
 
 export interface HypurrfiServiceController {
@@ -40,11 +47,15 @@ export interface HypurrfiServiceController {
   getLendingPool(
     request: GetLendingPoolRequest,
   ): Promise<GetLendingPoolResponse> | Observable<GetLendingPoolResponse> | GetLendingPoolResponse;
+
+  getSuppliedBalance(
+    request: SuppliedBalanceRequest,
+  ): Promise<SuppliedBalanceResponse> | Observable<SuppliedBalanceResponse> | SuppliedBalanceResponse;
 }
 
 export function HypurrfiServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["supplyErc20", "withdrawErc20", "getApr", "getLendingPool"];
+    const grpcMethods: string[] = ["supplyErc20", "withdrawErc20", "getApr", "getLendingPool", "getSuppliedBalance"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("HypurrfiService", method)(constructor.prototype[method], method, descriptor);
