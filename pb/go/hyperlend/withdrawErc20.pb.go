@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v6.30.0--rc1
-// source: hyperlend/models/withdrawErc20.proto
+// source: hyperlend/models/withdrawERC20.proto
 
 package hyperlend
 
@@ -30,12 +30,13 @@ type WithdrawERC20Request struct {
 	StrategyId          string `protobuf:"bytes,3,opt,name=strategyId,proto3" json:"strategyId,omitempty"`
 	PoolAddress         string `protobuf:"bytes,4,opt,name=poolAddress,proto3" json:"poolAddress,omitempty"`
 	AssetAddress        string `protobuf:"bytes,5,opt,name=assetAddress,proto3" json:"assetAddress,omitempty"`
+	Amount              string `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`
 }
 
 func (x *WithdrawERC20Request) Reset() {
 	*x = WithdrawERC20Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_hyperlend_models_withdrawErc20_proto_msgTypes[0]
+		mi := &file_hyperlend_models_withdrawERC20_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -48,7 +49,7 @@ func (x *WithdrawERC20Request) String() string {
 func (*WithdrawERC20Request) ProtoMessage() {}
 
 func (x *WithdrawERC20Request) ProtoReflect() protoreflect.Message {
-	mi := &file_hyperlend_models_withdrawErc20_proto_msgTypes[0]
+	mi := &file_hyperlend_models_withdrawERC20_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61,7 +62,7 @@ func (x *WithdrawERC20Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WithdrawERC20Request.ProtoReflect.Descriptor instead.
 func (*WithdrawERC20Request) Descriptor() ([]byte, []int) {
-	return file_hyperlend_models_withdrawErc20_proto_rawDescGZIP(), []int{0}
+	return file_hyperlend_models_withdrawERC20_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *WithdrawERC20Request) GetUserAddress() string {
@@ -99,6 +100,13 @@ func (x *WithdrawERC20Request) GetAssetAddress() string {
 	return ""
 }
 
+func (x *WithdrawERC20Request) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
 type WithdrawERC20Response struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -111,7 +119,7 @@ type WithdrawERC20Response struct {
 func (x *WithdrawERC20Response) Reset() {
 	*x = WithdrawERC20Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_hyperlend_models_withdrawErc20_proto_msgTypes[1]
+		mi := &file_hyperlend_models_withdrawERC20_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -124,7 +132,7 @@ func (x *WithdrawERC20Response) String() string {
 func (*WithdrawERC20Response) ProtoMessage() {}
 
 func (x *WithdrawERC20Response) ProtoReflect() protoreflect.Message {
-	mi := &file_hyperlend_models_withdrawErc20_proto_msgTypes[1]
+	mi := &file_hyperlend_models_withdrawERC20_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -137,7 +145,7 @@ func (x *WithdrawERC20Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WithdrawERC20Response.ProtoReflect.Descriptor instead.
 func (*WithdrawERC20Response) Descriptor() ([]byte, []int) {
-	return file_hyperlend_models_withdrawErc20_proto_rawDescGZIP(), []int{1}
+	return file_hyperlend_models_withdrawERC20_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *WithdrawERC20Response) GetChainId() int64 {
@@ -154,13 +162,13 @@ func (x *WithdrawERC20Response) GetTxHash() string {
 	return ""
 }
 
-var File_hyperlend_models_withdrawErc20_proto protoreflect.FileDescriptor
+var File_hyperlend_models_withdrawERC20_proto protoreflect.FileDescriptor
 
-var file_hyperlend_models_withdrawErc20_proto_rawDesc = []byte{
+var file_hyperlend_models_withdrawERC20_proto_rawDesc = []byte{
 	0x0a, 0x24, 0x68, 0x79, 0x70, 0x65, 0x72, 0x6c, 0x65, 0x6e, 0x64, 0x2f, 0x6d, 0x6f, 0x64, 0x65,
-	0x6c, 0x73, 0x2f, 0x77, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x45, 0x72, 0x63, 0x32, 0x30,
+	0x6c, 0x73, 0x2f, 0x77, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x45, 0x52, 0x43, 0x32, 0x30,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x09, 0x68, 0x79, 0x70, 0x65, 0x72, 0x6c, 0x65, 0x6e,
-	0x64, 0x22, 0xd0, 0x01, 0x0a, 0x14, 0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x45, 0x52,
+	0x64, 0x22, 0xe8, 0x01, 0x0a, 0x14, 0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x45, 0x52,
 	0x43, 0x32, 0x30, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x75, 0x73,
 	0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x0b, 0x75, 0x73, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x30, 0x0a, 0x13,
@@ -173,34 +181,35 @@ var file_hyperlend_models_withdrawErc20_proto_rawDesc = []byte{
 	0x01, 0x28, 0x09, 0x52, 0x0b, 0x70, 0x6f, 0x6f, 0x6c, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
 	0x12, 0x22, 0x0a, 0x0c, 0x61, 0x73, 0x73, 0x65, 0x74, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
 	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x61, 0x73, 0x73, 0x65, 0x74, 0x41, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x22, 0x49, 0x0a, 0x15, 0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77,
-	0x45, 0x52, 0x43, 0x32, 0x30, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a,
-	0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07,
-	0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x74, 0x78, 0x48, 0x61, 0x73,
-	0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x74, 0x78, 0x48, 0x61, 0x73, 0x68, 0x42,
-	0x1b, 0x5a, 0x19, 0x70, 0x62, 0x2f, 0x67, 0x6f, 0x2f, 0x68, 0x79, 0x70, 0x65, 0x72, 0x6c, 0x65,
-	0x6e, 0x64, 0x3b, 0x68, 0x79, 0x70, 0x65, 0x72, 0x6c, 0x65, 0x6e, 0x64, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x65, 0x73, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x49, 0x0a, 0x15,
+	0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x45, 0x52, 0x43, 0x32, 0x30, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x64, 0x12,
+	0x16, 0x0a, 0x06, 0x74, 0x78, 0x48, 0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x74, 0x78, 0x48, 0x61, 0x73, 0x68, 0x42, 0x1b, 0x5a, 0x19, 0x70, 0x62, 0x2f, 0x67, 0x6f,
+	0x2f, 0x68, 0x79, 0x70, 0x65, 0x72, 0x6c, 0x65, 0x6e, 0x64, 0x3b, 0x68, 0x79, 0x70, 0x65, 0x72,
+	0x6c, 0x65, 0x6e, 0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_hyperlend_models_withdrawErc20_proto_rawDescOnce sync.Once
-	file_hyperlend_models_withdrawErc20_proto_rawDescData = file_hyperlend_models_withdrawErc20_proto_rawDesc
+	file_hyperlend_models_withdrawERC20_proto_rawDescOnce sync.Once
+	file_hyperlend_models_withdrawERC20_proto_rawDescData = file_hyperlend_models_withdrawERC20_proto_rawDesc
 )
 
-func file_hyperlend_models_withdrawErc20_proto_rawDescGZIP() []byte {
-	file_hyperlend_models_withdrawErc20_proto_rawDescOnce.Do(func() {
-		file_hyperlend_models_withdrawErc20_proto_rawDescData = protoimpl.X.CompressGZIP(file_hyperlend_models_withdrawErc20_proto_rawDescData)
+func file_hyperlend_models_withdrawERC20_proto_rawDescGZIP() []byte {
+	file_hyperlend_models_withdrawERC20_proto_rawDescOnce.Do(func() {
+		file_hyperlend_models_withdrawERC20_proto_rawDescData = protoimpl.X.CompressGZIP(file_hyperlend_models_withdrawERC20_proto_rawDescData)
 	})
-	return file_hyperlend_models_withdrawErc20_proto_rawDescData
+	return file_hyperlend_models_withdrawERC20_proto_rawDescData
 }
 
-var file_hyperlend_models_withdrawErc20_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_hyperlend_models_withdrawErc20_proto_goTypes = []interface{}{
+var file_hyperlend_models_withdrawERC20_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_hyperlend_models_withdrawERC20_proto_goTypes = []interface{}{
 	(*WithdrawERC20Request)(nil),  // 0: hyperlend.WithdrawERC20Request
 	(*WithdrawERC20Response)(nil), // 1: hyperlend.WithdrawERC20Response
 }
-var file_hyperlend_models_withdrawErc20_proto_depIdxs = []int32{
+var file_hyperlend_models_withdrawERC20_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -208,13 +217,13 @@ var file_hyperlend_models_withdrawErc20_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_hyperlend_models_withdrawErc20_proto_init() }
-func file_hyperlend_models_withdrawErc20_proto_init() {
-	if File_hyperlend_models_withdrawErc20_proto != nil {
+func init() { file_hyperlend_models_withdrawERC20_proto_init() }
+func file_hyperlend_models_withdrawERC20_proto_init() {
+	if File_hyperlend_models_withdrawERC20_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_hyperlend_models_withdrawErc20_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_hyperlend_models_withdrawERC20_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*WithdrawERC20Request); i {
 			case 0:
 				return &v.state
@@ -226,7 +235,7 @@ func file_hyperlend_models_withdrawErc20_proto_init() {
 				return nil
 			}
 		}
-		file_hyperlend_models_withdrawErc20_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_hyperlend_models_withdrawERC20_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*WithdrawERC20Response); i {
 			case 0:
 				return &v.state
@@ -243,18 +252,18 @@ func file_hyperlend_models_withdrawErc20_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_hyperlend_models_withdrawErc20_proto_rawDesc,
+			RawDescriptor: file_hyperlend_models_withdrawERC20_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_hyperlend_models_withdrawErc20_proto_goTypes,
-		DependencyIndexes: file_hyperlend_models_withdrawErc20_proto_depIdxs,
-		MessageInfos:      file_hyperlend_models_withdrawErc20_proto_msgTypes,
+		GoTypes:           file_hyperlend_models_withdrawERC20_proto_goTypes,
+		DependencyIndexes: file_hyperlend_models_withdrawERC20_proto_depIdxs,
+		MessageInfos:      file_hyperlend_models_withdrawERC20_proto_msgTypes,
 	}.Build()
-	File_hyperlend_models_withdrawErc20_proto = out.File
-	file_hyperlend_models_withdrawErc20_proto_rawDesc = nil
-	file_hyperlend_models_withdrawErc20_proto_goTypes = nil
-	file_hyperlend_models_withdrawErc20_proto_depIdxs = nil
+	File_hyperlend_models_withdrawERC20_proto = out.File
+	file_hyperlend_models_withdrawERC20_proto_rawDesc = nil
+	file_hyperlend_models_withdrawERC20_proto_goTypes = nil
+	file_hyperlend_models_withdrawERC20_proto_depIdxs = nil
 }

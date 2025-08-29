@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	HyperLendService_SupplyERC20_FullMethodName    = "/hyperlend.HyperLendService/SupplyERC20"
-	HyperLendService_WithdrawERC20_FullMethodName  = "/hyperlend.HyperLendService/WithdrawERC20"
-	HyperLendService_GetAPY_FullMethodName         = "/hyperlend.HyperLendService/GetAPY"
-	HyperLendService_GetLendingPool_FullMethodName = "/hyperlend.HyperLendService/GetLendingPool"
+	HyperLendService_SupplyERC20_FullMethodName        = "/hyperlend.HyperLendService/SupplyERC20"
+	HyperLendService_WithdrawERC20_FullMethodName      = "/hyperlend.HyperLendService/WithdrawERC20"
+	HyperLendService_GetAPR_FullMethodName             = "/hyperlend.HyperLendService/GetAPR"
+	HyperLendService_GetLendingPool_FullMethodName     = "/hyperlend.HyperLendService/GetLendingPool"
+	HyperLendService_GetSuppliedBalance_FullMethodName = "/hyperlend.HyperLendService/GetSuppliedBalance"
 )
 
 // HyperLendServiceClient is the client API for HyperLendService service.
@@ -31,8 +32,9 @@ const (
 type HyperLendServiceClient interface {
 	SupplyERC20(ctx context.Context, in *SupplyERC20Request, opts ...grpc.CallOption) (*SupplyERC20Response, error)
 	WithdrawERC20(ctx context.Context, in *WithdrawERC20Request, opts ...grpc.CallOption) (*WithdrawERC20Response, error)
-	GetAPY(ctx context.Context, in *APRRequest, opts ...grpc.CallOption) (*APRResponse, error)
+	GetAPR(ctx context.Context, in *GetAPRRequest, opts ...grpc.CallOption) (*GetAPRResponse, error)
 	GetLendingPool(ctx context.Context, in *GetLendingPoolRequest, opts ...grpc.CallOption) (*GetLendingPoolResponse, error)
+	GetSuppliedBalance(ctx context.Context, in *SuppliedBalanceRequest, opts ...grpc.CallOption) (*SuppliedBalanceResponse, error)
 }
 
 type hyperLendServiceClient struct {
@@ -61,9 +63,9 @@ func (c *hyperLendServiceClient) WithdrawERC20(ctx context.Context, in *Withdraw
 	return out, nil
 }
 
-func (c *hyperLendServiceClient) GetAPY(ctx context.Context, in *APRRequest, opts ...grpc.CallOption) (*APRResponse, error) {
-	out := new(APRResponse)
-	err := c.cc.Invoke(ctx, HyperLendService_GetAPY_FullMethodName, in, out, opts...)
+func (c *hyperLendServiceClient) GetAPR(ctx context.Context, in *GetAPRRequest, opts ...grpc.CallOption) (*GetAPRResponse, error) {
+	out := new(GetAPRResponse)
+	err := c.cc.Invoke(ctx, HyperLendService_GetAPR_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -79,14 +81,24 @@ func (c *hyperLendServiceClient) GetLendingPool(ctx context.Context, in *GetLend
 	return out, nil
 }
 
+func (c *hyperLendServiceClient) GetSuppliedBalance(ctx context.Context, in *SuppliedBalanceRequest, opts ...grpc.CallOption) (*SuppliedBalanceResponse, error) {
+	out := new(SuppliedBalanceResponse)
+	err := c.cc.Invoke(ctx, HyperLendService_GetSuppliedBalance_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // HyperLendServiceServer is the server API for HyperLendService service.
 // All implementations should embed UnimplementedHyperLendServiceServer
 // for forward compatibility
 type HyperLendServiceServer interface {
 	SupplyERC20(context.Context, *SupplyERC20Request) (*SupplyERC20Response, error)
 	WithdrawERC20(context.Context, *WithdrawERC20Request) (*WithdrawERC20Response, error)
-	GetAPY(context.Context, *APRRequest) (*APRResponse, error)
+	GetAPR(context.Context, *GetAPRRequest) (*GetAPRResponse, error)
 	GetLendingPool(context.Context, *GetLendingPoolRequest) (*GetLendingPoolResponse, error)
+	GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error)
 }
 
 // UnimplementedHyperLendServiceServer should be embedded to have forward compatible implementations.
@@ -99,11 +111,14 @@ func (UnimplementedHyperLendServiceServer) SupplyERC20(context.Context, *SupplyE
 func (UnimplementedHyperLendServiceServer) WithdrawERC20(context.Context, *WithdrawERC20Request) (*WithdrawERC20Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WithdrawERC20 not implemented")
 }
-func (UnimplementedHyperLendServiceServer) GetAPY(context.Context, *APRRequest) (*APRResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAPY not implemented")
+func (UnimplementedHyperLendServiceServer) GetAPR(context.Context, *GetAPRRequest) (*GetAPRResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAPR not implemented")
 }
 func (UnimplementedHyperLendServiceServer) GetLendingPool(context.Context, *GetLendingPoolRequest) (*GetLendingPoolResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLendingPool not implemented")
+}
+func (UnimplementedHyperLendServiceServer) GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSuppliedBalance not implemented")
 }
 
 // UnsafeHyperLendServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -153,20 +168,20 @@ func _HyperLendService_WithdrawERC20_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HyperLendService_GetAPY_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(APRRequest)
+func _HyperLendService_GetAPR_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAPRRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HyperLendServiceServer).GetAPY(ctx, in)
+		return srv.(HyperLendServiceServer).GetAPR(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HyperLendService_GetAPY_FullMethodName,
+		FullMethod: HyperLendService_GetAPR_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HyperLendServiceServer).GetAPY(ctx, req.(*APRRequest))
+		return srv.(HyperLendServiceServer).GetAPR(ctx, req.(*GetAPRRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -189,6 +204,24 @@ func _HyperLendService_GetLendingPool_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HyperLendService_GetSuppliedBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuppliedBalanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HyperLendServiceServer).GetSuppliedBalance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HyperLendService_GetSuppliedBalance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HyperLendServiceServer).GetSuppliedBalance(ctx, req.(*SuppliedBalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // HyperLendService_ServiceDesc is the grpc.ServiceDesc for HyperLendService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -205,12 +238,16 @@ var HyperLendService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HyperLendService_WithdrawERC20_Handler,
 		},
 		{
-			MethodName: "GetAPY",
-			Handler:    _HyperLendService_GetAPY_Handler,
+			MethodName: "GetAPR",
+			Handler:    _HyperLendService_GetAPR_Handler,
 		},
 		{
 			MethodName: "GetLendingPool",
 			Handler:    _HyperLendService_GetLendingPool_Handler,
+		},
+		{
+			MethodName: "GetSuppliedBalance",
+			Handler:    _HyperLendService_GetSuppliedBalance_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

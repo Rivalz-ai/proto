@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	HypurrfiService_SupplyERC20_FullMethodName    = "/hypurrfi.HypurrfiService/SupplyERC20"
-	HypurrfiService_WithdrawERC20_FullMethodName  = "/hypurrfi.HypurrfiService/WithdrawERC20"
-	HypurrfiService_GetAPR_FullMethodName         = "/hypurrfi.HypurrfiService/GetAPR"
-	HypurrfiService_GetLendingPool_FullMethodName = "/hypurrfi.HypurrfiService/GetLendingPool"
+	HypurrfiService_SupplyERC20_FullMethodName        = "/hypurrfi.HypurrfiService/SupplyERC20"
+	HypurrfiService_WithdrawERC20_FullMethodName      = "/hypurrfi.HypurrfiService/WithdrawERC20"
+	HypurrfiService_GetAPR_FullMethodName             = "/hypurrfi.HypurrfiService/GetAPR"
+	HypurrfiService_GetLendingPool_FullMethodName     = "/hypurrfi.HypurrfiService/GetLendingPool"
+	HypurrfiService_GetSuppliedBalance_FullMethodName = "/hypurrfi.HypurrfiService/GetSuppliedBalance"
 )
 
 // HypurrfiServiceClient is the client API for HypurrfiService service.
@@ -33,6 +34,7 @@ type HypurrfiServiceClient interface {
 	WithdrawERC20(ctx context.Context, in *WithdrawERC20Request, opts ...grpc.CallOption) (*WithdrawERC20Response, error)
 	GetAPR(ctx context.Context, in *GetAPRRequest, opts ...grpc.CallOption) (*GetAPRResponse, error)
 	GetLendingPool(ctx context.Context, in *GetLendingPoolRequest, opts ...grpc.CallOption) (*GetLendingPoolResponse, error)
+	GetSuppliedBalance(ctx context.Context, in *SuppliedBalanceRequest, opts ...grpc.CallOption) (*SuppliedBalanceResponse, error)
 }
 
 type hypurrfiServiceClient struct {
@@ -79,6 +81,15 @@ func (c *hypurrfiServiceClient) GetLendingPool(ctx context.Context, in *GetLendi
 	return out, nil
 }
 
+func (c *hypurrfiServiceClient) GetSuppliedBalance(ctx context.Context, in *SuppliedBalanceRequest, opts ...grpc.CallOption) (*SuppliedBalanceResponse, error) {
+	out := new(SuppliedBalanceResponse)
+	err := c.cc.Invoke(ctx, HypurrfiService_GetSuppliedBalance_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // HypurrfiServiceServer is the server API for HypurrfiService service.
 // All implementations should embed UnimplementedHypurrfiServiceServer
 // for forward compatibility
@@ -87,6 +98,7 @@ type HypurrfiServiceServer interface {
 	WithdrawERC20(context.Context, *WithdrawERC20Request) (*WithdrawERC20Response, error)
 	GetAPR(context.Context, *GetAPRRequest) (*GetAPRResponse, error)
 	GetLendingPool(context.Context, *GetLendingPoolRequest) (*GetLendingPoolResponse, error)
+	GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error)
 }
 
 // UnimplementedHypurrfiServiceServer should be embedded to have forward compatible implementations.
@@ -104,6 +116,9 @@ func (UnimplementedHypurrfiServiceServer) GetAPR(context.Context, *GetAPRRequest
 }
 func (UnimplementedHypurrfiServiceServer) GetLendingPool(context.Context, *GetLendingPoolRequest) (*GetLendingPoolResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLendingPool not implemented")
+}
+func (UnimplementedHypurrfiServiceServer) GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSuppliedBalance not implemented")
 }
 
 // UnsafeHypurrfiServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -189,6 +204,24 @@ func _HypurrfiService_GetLendingPool_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HypurrfiService_GetSuppliedBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuppliedBalanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HypurrfiServiceServer).GetSuppliedBalance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HypurrfiService_GetSuppliedBalance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HypurrfiServiceServer).GetSuppliedBalance(ctx, req.(*SuppliedBalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // HypurrfiService_ServiceDesc is the grpc.ServiceDesc for HypurrfiService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -211,6 +244,10 @@ var HypurrfiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLendingPool",
 			Handler:    _HypurrfiService_GetLendingPool_Handler,
+		},
+		{
+			MethodName: "GetSuppliedBalance",
+			Handler:    _HypurrfiService_GetSuppliedBalance_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
