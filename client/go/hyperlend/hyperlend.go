@@ -5,13 +5,13 @@ import (
 	"github.com/Rivalz-ai/proto/pb/go/hyperlend"
 )
 
-var SVC hyperlend.HyperlendServiceClient
+var SVC hyperlend.HyperLendServiceClient
 
 func NewHyperlendServiceClient(grpc_server_address string) error {
 	conn, err := grpcClient.NewGRPCClientConn(grpc_server_address)
 	if err != nil {
 		return err
 	}
-	SVC = hyperlend.NewHyperlendServiceClient(conn)
+	SVC = hyperlend.NewHyperLendServiceClient(conn)
 	return nil
 }
