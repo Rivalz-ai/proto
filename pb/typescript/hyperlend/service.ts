@@ -7,9 +7,14 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
-import { APRRequest, APRResponse } from "./models/apr";
+import { GetAPRRequest, GetAPRResponse } from "./models/getApr";
 import { GetLendingPoolRequest, GetLendingPoolResponse } from "./models/getLendingPool";
-import { SupplyERC20Request, SupplyERC20Response } from "./models/supplyERC20";
+import {
+  SuppliedBalanceRequest,
+  SuppliedBalanceResponse,
+  SupplyERC20Request,
+  SupplyERC20Response,
+} from "./models/supplyERC20";
 import { WithdrawERC20Request, WithdrawERC20Response } from "./models/withdrawERC20";
 
 export const protobufPackage = "hyperlend";
@@ -21,9 +26,11 @@ export interface HyperLendServiceClient {
 
   withdrawErc20(request: WithdrawERC20Request): Observable<WithdrawERC20Response>;
 
-  getApy(request: APRRequest): Observable<APRResponse>;
+  getApr(request: GetAPRRequest): Observable<GetAPRResponse>;
 
   getLendingPool(request: GetLendingPoolRequest): Observable<GetLendingPoolResponse>;
+
+  getSuppliedBalance(request: SuppliedBalanceRequest): Observable<SuppliedBalanceResponse>;
 }
 
 export interface HyperLendServiceController {
@@ -35,16 +42,20 @@ export interface HyperLendServiceController {
     request: WithdrawERC20Request,
   ): Promise<WithdrawERC20Response> | Observable<WithdrawERC20Response> | WithdrawERC20Response;
 
-  getApy(request: APRRequest): Promise<APRResponse> | Observable<APRResponse> | APRResponse;
+  getApr(request: GetAPRRequest): Promise<GetAPRResponse> | Observable<GetAPRResponse> | GetAPRResponse;
 
   getLendingPool(
     request: GetLendingPoolRequest,
   ): Promise<GetLendingPoolResponse> | Observable<GetLendingPoolResponse> | GetLendingPoolResponse;
+
+  getSuppliedBalance(
+    request: SuppliedBalanceRequest,
+  ): Promise<SuppliedBalanceResponse> | Observable<SuppliedBalanceResponse> | SuppliedBalanceResponse;
 }
 
 export function HyperLendServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["supplyErc20", "withdrawErc20", "getApy", "getLendingPool"];
+    const grpcMethods: string[] = ["supplyErc20", "withdrawErc20", "getApr", "getLendingPool", "getSuppliedBalance"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("HyperLendService", method)(constructor.prototype[method], method, descriptor);

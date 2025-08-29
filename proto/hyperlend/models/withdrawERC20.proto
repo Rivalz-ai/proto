@@ -10,6 +10,7 @@ message WithdrawERC20Request {
   string strategyId = 3;
   string poolAddress = 4;
   string assetAddress = 5;
+  string amount = 6;
 }
 
 message WithdrawERC20Response {

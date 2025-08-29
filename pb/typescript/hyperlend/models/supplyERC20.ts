@@ -23,4 +23,16 @@ export interface SupplyERC20Response {
   amount: string;
 }
 
+export interface SuppliedBalanceRequest {
+  userAddress: string;
+  /** supplied token address */
+  tokenAddress: string;
+}
+
+export interface SuppliedBalanceResponse {
+  tokenAddress: string;
+  balance: string;
+  decimals: string;
+}
+
 export const HYPERLEND_PACKAGE_NAME = "hyperlend";

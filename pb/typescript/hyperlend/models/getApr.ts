@@ -2,18 +2,18 @@
 // versions:
 //   protoc-gen-ts_proto  v2.7.7
 //   protoc               v6.32.0
-// source: hyperlend/models/apr.proto
+// source: hyperlend/models/getApr.proto
 
 /* eslint-disable */
 
 export const protobufPackage = "hyperlend";
 
-export interface APRRequest {
-  assetAddress: string;
+export interface GetAPRRequest {
   tokenAddress: string;
+  poolAddress: string;
 }
 
-export interface APRResponse {
+export interface GetAPRResponse {
   supplyAPR: string;
   borrowAPR: string;
 }

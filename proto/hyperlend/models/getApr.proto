@@ -4,11 +4,12 @@ package hyperlend;
 
 option go_package = "pb/go/hyperlend;hyperlend";
 
-message APRRequest {
-  string assetAddress = 1;
+message GetAPRRequest {
+  string tokenAddress = 1;
+  string poolAddress = 2;
 }
 
-message APRResponse {
+message GetAPRResponse {
   string supplyAPR = 1;
   string borrowAPR = 2;
 }
