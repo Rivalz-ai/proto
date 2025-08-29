@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 import { GetAPRRequest, GetAPRResponse } from "./models/getAPR";
 import { GetLendingPoolRequest, GetLendingPoolResponse } from "./models/getLendingPool";
 import { SupplyERC20Request, SupplyERC20Response } from "./models/supplyERC20";
-import { WithdrawERC20Request, WithdrawERC20Response } from "./models/withdrawErc20";
+import { WithdrawERC20Request, WithdrawERC20Response } from "./models/withdrawERC20";
 
 export const protobufPackage = "hypurrfi";
 

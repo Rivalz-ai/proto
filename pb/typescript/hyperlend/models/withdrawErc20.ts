@@ -2,7 +2,7 @@
 // versions:
 //   protoc-gen-ts_proto  v2.7.7
 //   protoc               v6.32.0
-// source: hyperlend/models/withdrawErc20.proto
+// source: hyperlend/models/withdrawERC20.proto
 
 /* eslint-disable */
 

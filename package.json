@@ -1,6 +1,6 @@
 {
   "name": "@donleeit/protos",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "gen": "npx protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./pb/typescript --proto_path=./proto ./proto/**/*.proto --ts_proto_opt=esModuleInterop=true --ts_proto_opt=nestJs=true",
-    "build": "yarn gen && tsc -p tsconfig.json",
+    "build": "rm -rf pb/typescript && mkdir -p pb/typescript && yarn gen && tsc -p tsconfig.json",
     "publish:proto": "npm publish --access public"
   },
   "devDependencies": {
