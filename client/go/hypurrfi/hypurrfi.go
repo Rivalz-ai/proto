@@ -1,4 +1,4 @@
-package price
+package hypurrfi
 
 import (
 	grpcClient "github.com/Rivalz-ai/proto/client/go/common"
