@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package hyperlend;
 import "hyperlend/models/supplyERC20.proto";
-import "hyperlend/models/withdrawErc20.proto";
+import "hyperlend/models/withdrawERC20.proto";
 import "hyperlend/models/apr.proto";
 import "hyperlend/models/getLendingPool.proto";
 

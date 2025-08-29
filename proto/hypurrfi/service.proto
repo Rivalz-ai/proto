@@ -1,8 +1,8 @@
 syntax = "proto3";
 
 package hypurrfi;
-import "hypurrfi/models/supplyErc20.proto";
-import "hypurrfi/models/withdrawErc20.proto";
+import "hypurrfi/models/supplyERC20.proto";
+import "hypurrfi/models/withdrawERC20.proto";
 import "hypurrfi/models/getAPR.proto";
 import "hypurrfi/models/getLendingPool.proto";
 
