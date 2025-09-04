@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package morpho;
+
+option go_package = "pb/go/morpho;morpho";
+
+message GetLendingPoolRequest {}
+
+message GetLendingPoolResponse { 
+  repeated string poolAddress = 1; 
+}

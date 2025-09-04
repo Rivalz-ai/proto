@@ -23,6 +23,7 @@ const (
 	MorphoService_WithdrawERC20_FullMethodName      = "/morpho.MorphoService/WithdrawERC20"
 	MorphoService_GetAPR_FullMethodName             = "/morpho.MorphoService/GetAPR"
 	MorphoService_GetSuppliedBalance_FullMethodName = "/morpho.MorphoService/GetSuppliedBalance"
+	MorphoService_GetLendingPool_FullMethodName     = "/morpho.MorphoService/GetLendingPool"
 )
 
 // MorphoServiceClient is the client API for MorphoService service.
@@ -33,6 +34,7 @@ type MorphoServiceClient interface {
 	WithdrawERC20(ctx context.Context, in *WithdrawERC20Request, opts ...grpc.CallOption) (*WithdrawERC20Response, error)
 	GetAPR(ctx context.Context, in *GetAPRRequest, opts ...grpc.CallOption) (*GetAPRResponse, error)
 	GetSuppliedBalance(ctx context.Context, in *SuppliedBalanceRequest, opts ...grpc.CallOption) (*SuppliedBalanceResponse, error)
+	GetLendingPool(ctx context.Context, in *GetLendingPoolRequest, opts ...grpc.CallOption) (*GetLendingPoolResponse, error)
 }
 
 type morphoServiceClient struct {
@@ -79,6 +81,15 @@ func (c *morphoServiceClient) GetSuppliedBalance(ctx context.Context, in *Suppli
 	return out, nil
 }
 
+func (c *morphoServiceClient) GetLendingPool(ctx context.Context, in *GetLendingPoolRequest, opts ...grpc.CallOption) (*GetLendingPoolResponse, error) {
+	out := new(GetLendingPoolResponse)
+	err := c.cc.Invoke(ctx, MorphoService_GetLendingPool_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MorphoServiceServer is the server API for MorphoService service.
 // All implementations should embed UnimplementedMorphoServiceServer
 // for forward compatibility
@@ -87,6 +98,7 @@ type MorphoServiceServer interface {
 	WithdrawERC20(context.Context, *WithdrawERC20Request) (*WithdrawERC20Response, error)
 	GetAPR(context.Context, *GetAPRRequest) (*GetAPRResponse, error)
 	GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error)
+	GetLendingPool(context.Context, *GetLendingPoolRequest) (*GetLendingPoolResponse, error)
 }
 
 // UnimplementedMorphoServiceServer should be embedded to have forward compatible implementations.
@@ -104,6 +116,9 @@ func (UnimplementedMorphoServiceServer) GetAPR(context.Context, *GetAPRRequest) 
 }
 func (UnimplementedMorphoServiceServer) GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSuppliedBalance not implemented")
+}
+func (UnimplementedMorphoServiceServer) GetLendingPool(context.Context, *GetLendingPoolRequest) (*GetLendingPoolResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLendingPool not implemented")
 }
 
 // UnsafeMorphoServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -189,6 +204,24 @@ func _MorphoService_GetSuppliedBalance_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MorphoService_GetLendingPool_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLendingPoolRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MorphoServiceServer).GetLendingPool(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MorphoService_GetLendingPool_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MorphoServiceServer).GetLendingPool(ctx, req.(*GetLendingPoolRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MorphoService_ServiceDesc is the grpc.ServiceDesc for MorphoService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -211,6 +244,10 @@ var MorphoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSuppliedBalance",
 			Handler:    _MorphoService_GetSuppliedBalance_Handler,
+		},
+		{
+			MethodName: "GetLendingPool",
+			Handler:    _MorphoService_GetLendingPool_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

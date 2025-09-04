@@ -4,7 +4,7 @@ package morpho;
 import "morpho/models/supplyERC20.proto";
 import "morpho/models/withdrawERC20.proto";
 import "morpho/models/getAPR.proto";
-
+import "morpho/models/getLendingPool.proto";
 
 option go_package = "pb/go/morpho;morpho";
 
@@ -13,4 +13,5 @@ service MorphoService {
   rpc WithdrawERC20(WithdrawERC20Request) returns (WithdrawERC20Response) {};
   rpc GetAPR(GetAPRRequest) returns (GetAPRResponse) {};
   rpc GetSuppliedBalance(SuppliedBalanceRequest)returns (SuppliedBalanceResponse) {};
+  rpc GetLendingPool(GetLendingPoolRequest) returns (GetLendingPoolResponse) {};
 }
