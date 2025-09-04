@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package morpho;
+
+option go_package = "pb/go/morpho;morpho";
+
+message WithdrawERC20Request {
+  string userAddress = 1;
+  string orchestratorAddress = 2;
+  string strategyId = 3;
+  string poolAddress = 4;
+  string assetAddress = 5;
+  string amount = 6;
+}
+
+message WithdrawERC20Response {
+  int64 chainId = 1;
+  string txHash = 2;
+  string amount = 3;
+}
