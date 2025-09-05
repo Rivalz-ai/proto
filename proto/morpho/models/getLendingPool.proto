@@ -4,7 +4,9 @@ package morpho;
 
 option go_package = "pb/go/morpho;morpho";
 
-message GetLendingPoolRequest {}
+message GetLendingPoolRequest {
+   int64 chainId = 1;
+}
 
 message GetLendingPoolResponse { 
   repeated string poolAddress = 1; 
