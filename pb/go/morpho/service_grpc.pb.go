@@ -23,6 +23,8 @@ const (
 	MorphoService_WithdrawERC20_FullMethodName      = "/morpho.MorphoService/WithdrawERC20"
 	MorphoService_GetAPR_FullMethodName             = "/morpho.MorphoService/GetAPR"
 	MorphoService_GetAPY_FullMethodName             = "/morpho.MorphoService/GetAPY"
+	MorphoService_GetTVL_FullMethodName             = "/morpho.MorphoService/GetTVL"
+	MorphoService_GetLiquidity_FullMethodName       = "/morpho.MorphoService/GetLiquidity"
 	MorphoService_GetSuppliedBalance_FullMethodName = "/morpho.MorphoService/GetSuppliedBalance"
 	MorphoService_GetLendingPool_FullMethodName     = "/morpho.MorphoService/GetLendingPool"
 )
@@ -35,6 +37,8 @@ type MorphoServiceClient interface {
 	WithdrawERC20(ctx context.Context, in *WithdrawERC20Request, opts ...grpc.CallOption) (*WithdrawERC20Response, error)
 	GetAPR(ctx context.Context, in *GetAPRRequest, opts ...grpc.CallOption) (*GetAPRResponse, error)
 	GetAPY(ctx context.Context, in *GetAPYRequest, opts ...grpc.CallOption) (*GetAPYResponse, error)
+	GetTVL(ctx context.Context, in *GetTVLRequest, opts ...grpc.CallOption) (*GetTVLResponse, error)
+	GetLiquidity(ctx context.Context, in *GetLiquidityRequest, opts ...grpc.CallOption) (*GetLiquidityResponse, error)
 	GetSuppliedBalance(ctx context.Context, in *SuppliedBalanceRequest, opts ...grpc.CallOption) (*SuppliedBalanceResponse, error)
 	GetLendingPool(ctx context.Context, in *GetLendingPoolRequest, opts ...grpc.CallOption) (*GetLendingPoolResponse, error)
 }
@@ -83,6 +87,24 @@ func (c *morphoServiceClient) GetAPY(ctx context.Context, in *GetAPYRequest, opt
 	return out, nil
 }
 
+func (c *morphoServiceClient) GetTVL(ctx context.Context, in *GetTVLRequest, opts ...grpc.CallOption) (*GetTVLResponse, error) {
+	out := new(GetTVLResponse)
+	err := c.cc.Invoke(ctx, MorphoService_GetTVL_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *morphoServiceClient) GetLiquidity(ctx context.Context, in *GetLiquidityRequest, opts ...grpc.CallOption) (*GetLiquidityResponse, error) {
+	out := new(GetLiquidityResponse)
+	err := c.cc.Invoke(ctx, MorphoService_GetLiquidity_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *morphoServiceClient) GetSuppliedBalance(ctx context.Context, in *SuppliedBalanceRequest, opts ...grpc.CallOption) (*SuppliedBalanceResponse, error) {
 	out := new(SuppliedBalanceResponse)
 	err := c.cc.Invoke(ctx, MorphoService_GetSuppliedBalance_FullMethodName, in, out, opts...)
@@ -109,6 +131,8 @@ type MorphoServiceServer interface {
 	WithdrawERC20(context.Context, *WithdrawERC20Request) (*WithdrawERC20Response, error)
 	GetAPR(context.Context, *GetAPRRequest) (*GetAPRResponse, error)
 	GetAPY(context.Context, *GetAPYRequest) (*GetAPYResponse, error)
+	GetTVL(context.Context, *GetTVLRequest) (*GetTVLResponse, error)
+	GetLiquidity(context.Context, *GetLiquidityRequest) (*GetLiquidityResponse, error)
 	GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error)
 	GetLendingPool(context.Context, *GetLendingPoolRequest) (*GetLendingPoolResponse, error)
 }
@@ -128,6 +152,12 @@ func (UnimplementedMorphoServiceServer) GetAPR(context.Context, *GetAPRRequest) 
 }
 func (UnimplementedMorphoServiceServer) GetAPY(context.Context, *GetAPYRequest) (*GetAPYResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAPY not implemented")
+}
+func (UnimplementedMorphoServiceServer) GetTVL(context.Context, *GetTVLRequest) (*GetTVLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTVL not implemented")
+}
+func (UnimplementedMorphoServiceServer) GetLiquidity(context.Context, *GetLiquidityRequest) (*GetLiquidityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLiquidity not implemented")
 }
 func (UnimplementedMorphoServiceServer) GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSuppliedBalance not implemented")
@@ -219,6 +249,42 @@ func _MorphoService_GetAPY_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MorphoService_GetTVL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTVLRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MorphoServiceServer).GetTVL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MorphoService_GetTVL_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MorphoServiceServer).GetTVL(ctx, req.(*GetTVLRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MorphoService_GetLiquidity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLiquidityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MorphoServiceServer).GetLiquidity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MorphoService_GetLiquidity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MorphoServiceServer).GetLiquidity(ctx, req.(*GetLiquidityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MorphoService_GetSuppliedBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SuppliedBalanceRequest)
 	if err := dec(in); err != nil {
@@ -277,6 +343,14 @@ var MorphoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAPY",
 			Handler:    _MorphoService_GetAPY_Handler,
+		},
+		{
+			MethodName: "GetTVL",
+			Handler:    _MorphoService_GetTVL_Handler,
+		},
+		{
+			MethodName: "GetLiquidity",
+			Handler:    _MorphoService_GetLiquidity_Handler,
 		},
 		{
 			MethodName: "GetSuppliedBalance",

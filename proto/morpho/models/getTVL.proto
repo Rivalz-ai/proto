@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package morpho;
+
+option go_package = "pb/go/morpho;morpho";
+
+message GetTVLRequest {
+  string tokenAddress = 1;
+  string poolAddress = 2;
+  int64 chainId =3;
+}
+
+message GetTVLResponse {
+  double TVL = 1;
+}
