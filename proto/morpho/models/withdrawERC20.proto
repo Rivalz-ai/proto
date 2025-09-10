@@ -11,6 +11,7 @@ message WithdrawERC20Request {
   string poolAddress = 4;
   string assetAddress = 5;
   string amount = 6;
+  int64 chainId =7;
 }
 
 message WithdrawERC20Response {

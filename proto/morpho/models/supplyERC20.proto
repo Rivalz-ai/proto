@@ -11,6 +11,7 @@ message SupplyERC20Request {
   string poolAddress = 4;
   string amount = 5;
   string assetAddress = 6;
+  int64 chainId =7;
 }
 
 message SupplyERC20Response {
