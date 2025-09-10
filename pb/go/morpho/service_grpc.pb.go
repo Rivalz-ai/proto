@@ -22,6 +22,7 @@ const (
 	MorphoService_SupplyERC20_FullMethodName        = "/morpho.MorphoService/SupplyERC20"
 	MorphoService_WithdrawERC20_FullMethodName      = "/morpho.MorphoService/WithdrawERC20"
 	MorphoService_GetAPR_FullMethodName             = "/morpho.MorphoService/GetAPR"
+	MorphoService_GetAPY_FullMethodName             = "/morpho.MorphoService/GetAPY"
 	MorphoService_GetSuppliedBalance_FullMethodName = "/morpho.MorphoService/GetSuppliedBalance"
 	MorphoService_GetLendingPool_FullMethodName     = "/morpho.MorphoService/GetLendingPool"
 )
@@ -33,6 +34,7 @@ type MorphoServiceClient interface {
 	SupplyERC20(ctx context.Context, in *SupplyERC20Request, opts ...grpc.CallOption) (*SupplyERC20Response, error)
 	WithdrawERC20(ctx context.Context, in *WithdrawERC20Request, opts ...grpc.CallOption) (*WithdrawERC20Response, error)
 	GetAPR(ctx context.Context, in *GetAPRRequest, opts ...grpc.CallOption) (*GetAPRResponse, error)
+	GetAPY(ctx context.Context, in *GetAPYRequest, opts ...grpc.CallOption) (*GetAPYResponse, error)
 	GetSuppliedBalance(ctx context.Context, in *SuppliedBalanceRequest, opts ...grpc.CallOption) (*SuppliedBalanceResponse, error)
 	GetLendingPool(ctx context.Context, in *GetLendingPoolRequest, opts ...grpc.CallOption) (*GetLendingPoolResponse, error)
 }
@@ -72,6 +74,15 @@ func (c *morphoServiceClient) GetAPR(ctx context.Context, in *GetAPRRequest, opt
 	return out, nil
 }
 
+func (c *morphoServiceClient) GetAPY(ctx context.Context, in *GetAPYRequest, opts ...grpc.CallOption) (*GetAPYResponse, error) {
+	out := new(GetAPYResponse)
+	err := c.cc.Invoke(ctx, MorphoService_GetAPY_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *morphoServiceClient) GetSuppliedBalance(ctx context.Context, in *SuppliedBalanceRequest, opts ...grpc.CallOption) (*SuppliedBalanceResponse, error) {
 	out := new(SuppliedBalanceResponse)
 	err := c.cc.Invoke(ctx, MorphoService_GetSuppliedBalance_FullMethodName, in, out, opts...)
@@ -97,6 +108,7 @@ type MorphoServiceServer interface {
 	SupplyERC20(context.Context, *SupplyERC20Request) (*SupplyERC20Response, error)
 	WithdrawERC20(context.Context, *WithdrawERC20Request) (*WithdrawERC20Response, error)
 	GetAPR(context.Context, *GetAPRRequest) (*GetAPRResponse, error)
+	GetAPY(context.Context, *GetAPYRequest) (*GetAPYResponse, error)
 	GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error)
 	GetLendingPool(context.Context, *GetLendingPoolRequest) (*GetLendingPoolResponse, error)
 }
@@ -113,6 +125,9 @@ func (UnimplementedMorphoServiceServer) WithdrawERC20(context.Context, *Withdraw
 }
 func (UnimplementedMorphoServiceServer) GetAPR(context.Context, *GetAPRRequest) (*GetAPRResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAPR not implemented")
+}
+func (UnimplementedMorphoServiceServer) GetAPY(context.Context, *GetAPYRequest) (*GetAPYResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAPY not implemented")
 }
 func (UnimplementedMorphoServiceServer) GetSuppliedBalance(context.Context, *SuppliedBalanceRequest) (*SuppliedBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSuppliedBalance not implemented")
@@ -186,6 +201,24 @@ func _MorphoService_GetAPR_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MorphoService_GetAPY_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAPYRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MorphoServiceServer).GetAPY(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MorphoService_GetAPY_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MorphoServiceServer).GetAPY(ctx, req.(*GetAPYRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MorphoService_GetSuppliedBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SuppliedBalanceRequest)
 	if err := dec(in); err != nil {
@@ -240,6 +273,10 @@ var MorphoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAPR",
 			Handler:    _MorphoService_GetAPR_Handler,
+		},
+		{
+			MethodName: "GetAPY",
+			Handler:    _MorphoService_GetAPY_Handler,
 		},
 		{
 			MethodName: "GetSuppliedBalance",
